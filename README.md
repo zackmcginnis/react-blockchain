@@ -1,3 +1,33 @@
+This is a very simple web application which reads block data from the ethereum blockchain (testnet) using web3.js.  
+
+Web3.js is a library which provides an interface to the EVM (Ethereum Virtual Machine) through an ethereum node.
+
+This node will run locally for this application.  To do this, we connect to the ethereum blockchain (testnet, in this case), using the Geth (Go / Ethereum) client. Running Geth locally will sync the specified network (mainnet, testnet, etc...) to your machine. This will act as web3.js's portal into the chosen ethereum blockchain.
+
+## Setup
+Install geth
+https://geth.ethereum.org/install/
+
+Open geth client in terminal:
+```sh
+ geth --rpc --testnet --cache=1024 --rpc --rpcport 8545 --rpcaddr 127.0.0.1 --rpccorsdomain "*" --rpcapi "eth,net,web3"
+```
+Note: you may need to wait some time for your client to download the blockchain data
+
+Install application dependencies:
+```sh
+npm install
+```
+
+Run project:
+```sh
+npm start
+```
+
+Navigate to http://localhost:3000/
+
+## React General
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>

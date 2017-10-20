@@ -17,9 +17,7 @@ class Home extends Component {
   }
 
   componentWillMount() {
-    console.log(web3.eth.accounts);
     var curr_block_no = web3.eth.blockNumber;
-    console.log(curr_block_no);
     this.setState({
       curr_block: curr_block_no
     });
@@ -43,8 +41,8 @@ class Home extends Component {
   }
 
   render() {
-    console.log(web3.eth)
-  	console.log(web3.eth.getBlockNumber().then(console.log));
+    console.log("from render", web3.eth)
+  	console.log("from render", web3.eth.blockNumber);
 
     var tableRows = [];
     _.each(this.state.block_ids, (value, index) => {
