@@ -67,7 +67,7 @@
     "web3-redux": "^0.5.2"
   },
   "scripts": {
-    "start": "concurrently --kill-others \"geth --rpc --testnet --rpccorsdomain=*\" \"react-scripts start\"",
+    "start": "concurrently --kill-others \"geth --rpc --light --testnet --rpccorsdomain=*\" \"react-scripts start\"",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
@@ -115,7 +115,7 @@
       "web.jsx",
       "jsx"
     ]
-  },  
+  },
   "keywords": [
     "react",
     "redux",
