@@ -12,7 +12,7 @@ class Home extends Component {
             <h2>Smart Contract Betting</h2>
             <p>Register, log in, get an Ethereum account/address, create a smart contract (wager), browse for other similar contracts</p>
             <h2>Block Explorer</h2>
-            <p>Explorer the most recent transactions contained in blocks updated in real-time</p>
+            <p>Explore the most recent Ethereum blockchain transactions contained in blocks updated in real-time</p>
           </div>
         </div>
       </main>
