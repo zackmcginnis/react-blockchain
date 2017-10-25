@@ -1,5 +1,10 @@
-.App {
+/*.App {
   text-align: center;
+}*/
+.BlockExplorer {
+  background-color: #0c1a2b;
+  height: 100vh;
+  vertical-align:top;
 }
 
 .App-logo {
@@ -7,11 +12,13 @@
   height: 80px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
+.app-header {
   padding: 20px;
   color: white;
+  text-align: center;
+}
+
+.App-header {
 }
 
 .App-title {
@@ -20,6 +27,14 @@
 
 .App-intro {
   font-size: large;
+}
+
+.block-content {
+}
+
+.block-table {
+  margin: auto;
+  margin-top: 20px;
 }
 
 @keyframes App-logo-spin {

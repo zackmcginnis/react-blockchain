@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import logo from '../BlockExplorer/logo.svg';
 import Web3 from 'web3';
 import './style.css';
-var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 
 class Block extends Component {
 
@@ -16,6 +17,7 @@ class Block extends Component {
   componentWillMount() {
     // Get the block hash from URL arguments (defined by Route pattern)
     var block_hash = this.props.match.params.blockHash;
+    console.log("props", this.props)
     this.getBlockState(block_hash);
   }
 
@@ -49,9 +51,12 @@ class Block extends Component {
     const difficultyTotal = parseInt(block.totalDifficulty, 10);
     return (
       <div className="Block">
-        <h2>Block Info</h2>
+        <div className="logo-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h2>Block Info</h2>
+        </div>
         <div>
-          <table>
+          <table className="block-table">
             <tbody>
               <tr><td className="tdLabel">Height: </td><td>{this.state.block.number}</td></tr>
               <tr><td className="tdLabel">Timestamp: </td><td>{this.state.block_ts}</td></tr>
