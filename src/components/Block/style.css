@@ -1,9 +1,9 @@
 .Block {
-  background-color: #0c1a2b;
+  background-color: white;
   height: 100vh;
   vertical-align:top;
   padding: 20px;
-  color: white;
+  color: #0c1a2b;
   text-align: center;
 }
 
@@ -14,7 +14,7 @@
 
 .app-header {
   padding: 20px;
-  color: white;
+  color: #0c1a2b;
   text-align: center;
 }
 

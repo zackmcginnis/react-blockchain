@@ -2,9 +2,14 @@
   text-align: center;
 }*/
 .BlockExplorer {
-  background-color: #0c1a2b;
+  background-color: white;
   height: 100vh;
   vertical-align:top;
+  color: #0c1a2b;
+}
+
+.logo-header {
+  margin-top: 40px;
 }
 
 .App-logo {
@@ -14,7 +19,7 @@
 
 .app-header {
   padding: 20px;
-  color: white;
+  color: #0c1a2b;
   text-align: center;
 }
 
