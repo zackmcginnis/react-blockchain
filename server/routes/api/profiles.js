@@ -1,7 +1,7 @@
-var router = require('express').Router();
-var mongoose = require('mongoose');
-var User = mongoose.model('User');
-var auth = require('../auth');
+let router = require('express').Router();
+let mongoose = require('mongoose');
+let User = mongoose.model('User');
+let auth = require('../auth');
 
 // Preload user profile on routes with ':username'
 router.param('username', function(req, res, next, username){
@@ -27,7 +27,7 @@ router.get('/:username', auth.optional, function(req, res, next){
 });
 
 router.post('/:username/follow', auth.required, function(req, res, next){
-  var profileId = req.profile._id;
+  let profileId = req.profile._id;
 
   User.findById(req.payload.id).then(function(user){
     if (!user) { return res.sendStatus(401); }
@@ -39,7 +39,7 @@ router.post('/:username/follow', auth.required, function(req, res, next){
 });
 
 router.delete('/:username/follow', auth.required, function(req, res, next){
-  var profileId = req.profile._id;
+  let profileId = req.profile._id;
 
   User.findById(req.payload.id).then(function(user){
     if (!user) { return res.sendStatus(401); }

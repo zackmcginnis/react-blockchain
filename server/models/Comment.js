@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var CommentSchema = new mongoose.Schema({
+let CommentSchema = new mongoose.Schema({
   body: String,
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   article: { type: mongoose.Schema.Types.ObjectId, ref: 'Article' }

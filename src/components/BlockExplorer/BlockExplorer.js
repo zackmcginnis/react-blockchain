@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import Web3 from 'web3';
 import _ from 'lodash';
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+const filter = web3.eth.filter('latest');
 
 class BlockExplorer extends Component {
 
@@ -19,20 +20,22 @@ class BlockExplorer extends Component {
   }
 
   componentWillMount() {
-    var curr_block_no = web3.eth.blockNumber;
-    this.setState({
-      curr_block: curr_block_no
+    filter.watch((error, result) =>{
+      const block = web3.eth.getBlock(result, true);
+      this.setState({
+        curr_block: block.number
+      });
+      this.getBlocks(block.number);
     });
-    this.getBlocks(curr_block_no);
   }
 
   getBlocks(curr_block_no) {
     const block_ids = this.state.block_ids.slice();
     const block_hashes = this.state.block_hashes.slice();
-    var max_blocks = 10;
+    let max_blocks = 10;
     if (curr_block_no < max_blocks) max_blocks = curr_block_no;
-    for (var i = 0; i < max_blocks; i++, curr_block_no--) {
-      var currBlockObj = web3.eth.getBlock(curr_block_no);
+    for (let i = 0; i < max_blocks; i++, curr_block_no--) {
+      let currBlockObj = web3.eth.getBlock(curr_block_no);
       block_ids.push(currBlockObj.number);
       block_hashes.push(currBlockObj.hash);
     }
@@ -44,11 +47,12 @@ class BlockExplorer extends Component {
 
   render() {
 
-    console.log("from render", web3.eth)
-  	console.log("from render", web3.eth.blockNumber);
+    console.log("render", this.state.curr_block)
 
     let tableRows = [];
-    _.each(this.state.block_ids, (value, index) => {
+    console.log("this.state.block_ids", this.state.block_ids)
+    let ids = [...new Set(this.state.block_ids)];
+    _.each(ids, (value, index) => {
       tableRows.push(
         <tr key={this.state.block_hashes[index]}>
           <td className="tdCenter">{this.state.block_ids[index]}</td>

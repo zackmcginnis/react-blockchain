@@ -17,7 +17,7 @@ export function signUpUser(name) {
       // authentication.setProvider(web3.currentProvider)
       //
       // // Declaring this for later so we can chain functions on Authentication.
-      // var authenticationInstance
+      // let authenticationInstance
       //
       // // Get current ethereum wallet.
       // web3.eth.getCoinbase((error, coinbase) => {

@@ -1,8 +1,8 @@
-var mongoose = require('mongoose');
-var router = require('express').Router();
-var passport = require('passport');
-var User = mongoose.model('User');
-var auth = require('../auth');
+let mongoose = require('mongoose');
+let router = require('express').Router();
+let passport = require('passport');
+let User = mongoose.model('User');
+let auth = require('../auth');
 
 router.get('/user', auth.required, function(req, res, next){
   User.findById(req.payload.id).then(function(user){
@@ -61,7 +61,7 @@ router.post('/users/login', function(req, res, next){
 });
 
 router.post('/users', function(req, res, next){
-  var user = new User();
+  let user = new User();
 
   user.username = req.body.user.username;
   user.email = req.body.user.email;

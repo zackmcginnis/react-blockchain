@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
-var uniqueValidator = require('mongoose-unique-validator');
-var slug = require('slug');
-var User = mongoose.model('User');
+let mongoose = require('mongoose');
+let uniqueValidator = require('mongoose-unique-validator');
+let slug = require('slug');
+let User = mongoose.model('User');
 
-var ArticleSchema = new mongoose.Schema({
+let ArticleSchema = new mongoose.Schema({
   slug: {type: String, lowercase: true, unique: true},
   title: String,
   description: String,
@@ -29,7 +29,7 @@ ArticleSchema.methods.slugify = function() {
 };
 
 ArticleSchema.methods.updateFavoriteCount = function() {
-  var article = this;
+  let article = this;
 
   return User.count({favorites: {$in: [article._id]}}).then(function(count){
     article.favoritesCount = count;

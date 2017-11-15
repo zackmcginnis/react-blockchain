@@ -16,14 +16,14 @@ class Block extends Component {
 
   componentWillMount() {
     // Get the block hash from URL arguments (defined by Route pattern)
-    var block_hash = this.props.match.params.blockHash;
+    let block_hash = this.props.match.params.blockHash;
     console.log("props", this.props)
     this.getBlockState(block_hash);
   }
 
   componentWillReceiveProps(nextProps) {
-    var block_hash_old = this.props.match.params.blockHash;
-    var block_hash_new = nextProps.match.params.blockHash;
+    let block_hash_old = this.props.match.params.blockHash;
+    let block_hash_new = nextProps.match.params.blockHash;
     // compare old and new URL parameter (block hash)
     // if different, reload state using web3
     if (block_hash_old !== block_hash_new)
@@ -33,7 +33,7 @@ class Block extends Component {
   getBlockState(block_hash) {
     console.log("Block hash: " + block_hash);
     // Use web3 to get the Block object
-    var currBlockObj = web3.eth.getBlock(block_hash);
+    let currBlockObj = web3.eth.getBlock(block_hash);
     console.log(JSON.stringify(currBlockObj));
     // Set the Component state
     this.setState({

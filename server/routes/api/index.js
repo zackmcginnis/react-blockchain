@@ -1,4 +1,4 @@
-var router = require('express').Router();
+let router = require('express').Router();
 
 router.use('/', require('./users'));
 router.use('/profiles', require('./profiles'));

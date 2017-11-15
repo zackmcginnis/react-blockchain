@@ -26,7 +26,7 @@ export function loginUser() {
       // authentication.setProvider(web3.currentProvider)
       //
       // // Declaring this for later so we can chain functions on Authentication.
-      // var authenticationInstance
+      // let authenticationInstance
       //
       // // Get current ethereum wallet.
       // web3.eth.getCoinbase((error, coinbase) => {
@@ -42,13 +42,13 @@ export function loginUser() {
       //     authenticationInstance.login({from: coinbase})
       //     .then(function(result) {
       //       // If no error, login user.
-      //       var userName = web3.toUtf8(result)
+      //       let userName = web3.toUtf8(result)
       //
       //       dispatch(userLoggedIn({"name": userName}))
       //
       //       // Used a manual redirect here as opposed to a wrapper.
       //       // This way, once logged in a user can still access the home page.
-      //       var currentLocation = browserHistory.getCurrentLocation()
+      //       let currentLocation = browserHistory.getCurrentLocation()
       //
       //       if ('redirect' in currentLocation.query)
       //       {

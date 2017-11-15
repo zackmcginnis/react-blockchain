@@ -1,9 +1,9 @@
-var router = require('express').Router();
-var mongoose = require('mongoose');
-var Article = mongoose.model('Article');
-var Comment = mongoose.model('Comment');
-var User = mongoose.model('User');
-var auth = require('../auth');
+let router = require('express').Router();
+let mongoose = require('mongoose');
+let Article = mongoose.model('Article');
+let Comment = mongoose.model('Comment');
+let User = mongoose.model('User');
+let auth = require('../auth');
 
 // Preload article objects on routes with ':article'
 router.param('article', function(req, res, next, slug) {
@@ -29,9 +29,9 @@ router.param('comment', function(req, res, next, id) {
 });
 
 router.get('/', auth.optional, function(req, res, next) {
-  var query = {};
-  var limit = 20;
-  var offset = 0;
+  let query = {};
+  let limit = 20;
+  let offset = 0;
 
   if(typeof req.query.limit !== 'undefined'){
     limit = req.query.limit;
@@ -49,8 +49,8 @@ router.get('/', auth.optional, function(req, res, next) {
     req.query.author ? User.findOne({username: req.query.author}) : null,
     req.query.favorited ? User.findOne({username: req.query.favorited}) : null
   ]).then(function(results){
-    var author = results[0];
-    var favoriter = results[1];
+    let author = results[0];
+    let favoriter = results[1];
 
     if(author){
       query.author = author._id;
@@ -72,9 +72,9 @@ router.get('/', auth.optional, function(req, res, next) {
       Article.count(query).exec(),
       req.payload ? User.findById(req.payload.id) : null,
     ]).then(function(results){
-      var articles = results[0];
-      var articlesCount = results[1];
-      var user = results[2];
+      let articles = results[0];
+      let articlesCount = results[1];
+      let user = results[2];
 
       return res.json({
         articles: articles.map(function(article){
@@ -87,8 +87,8 @@ router.get('/', auth.optional, function(req, res, next) {
 });
 
 router.get('/feed', auth.required, function(req, res, next) {
-  var limit = 20;
-  var offset = 0;
+  let limit = 20;
+  let offset = 0;
 
   if(typeof req.query.limit !== 'undefined'){
     limit = req.query.limit;
@@ -109,8 +109,8 @@ router.get('/feed', auth.required, function(req, res, next) {
         .exec(),
       Article.count({ author: {$in: user.following}})
     ]).then(function(results){
-      var articles = results[0];
-      var articlesCount = results[1];
+      let articles = results[0];
+      let articlesCount = results[1];
 
       return res.json({
         articles: articles.map(function(article){
@@ -126,7 +126,7 @@ router.post('/', auth.required, function(req, res, next) {
   User.findById(req.payload.id).then(function(user){
     if (!user) { return res.sendStatus(401); }
 
-    var article = new Article(req.body.article);
+    let article = new Article(req.body.article);
 
     article.author = user;
 
@@ -143,7 +143,7 @@ router.get('/:article', auth.optional, function(req, res, next) {
     req.payload ? User.findById(req.payload.id) : null,
     req.article.populate('author').execPopulate()
   ]).then(function(results){
-    var user = results[0];
+    let user = results[0];
 
     return res.json({article: req.article.toJSONFor(user)});
   }).catch(next);
@@ -195,7 +195,7 @@ router.delete('/:article', auth.required, function(req, res, next) {
 
 // Favorite an article
 router.post('/:article/favorite', auth.required, function(req, res, next) {
-  var articleId = req.article._id;
+  let articleId = req.article._id;
 
   User.findById(req.payload.id).then(function(user){
     if (!user) { return res.sendStatus(401); }
@@ -210,7 +210,7 @@ router.post('/:article/favorite', auth.required, function(req, res, next) {
 
 // Unfavorite an article
 router.delete('/:article/favorite', auth.required, function(req, res, next) {
-  var articleId = req.article._id;
+  let articleId = req.article._id;
 
   User.findById(req.payload.id).then(function (user){
     if (!user) { return res.sendStatus(401); }
@@ -249,7 +249,7 @@ router.post('/:article/comments', auth.required, function(req, res, next) {
   User.findById(req.payload.id).then(function(user){
     if(!user){ return res.sendStatus(401); }
 
-    var comment = new Comment(req.body.comment);
+    let comment = new Comment(req.body.comment);
     comment.article = req.article;
     comment.author = user;
 

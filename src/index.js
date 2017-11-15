@@ -38,13 +38,12 @@ ReactDOM.render((
           <App />
           <main>
             <Switch>
-              <Route path="/" exact component={Home} />
               <Route path="/dashboard" component={UserIsAuthenticated(Dashboard)} />
               <Route path="/signup" component={UserIsNotAuthenticated(SignUp)} />
               <Route path="/profile" component={UserIsAuthenticated(Profile)} />
               <Route path="/explorer" exact component={BlockExplorer} />
               <Route path={`/explorer/:blockHash`} component={Block} />
-              <Redirect to="/" />
+              <Redirect to="/explorer" />
             </Switch>
           </main>
         </div>
