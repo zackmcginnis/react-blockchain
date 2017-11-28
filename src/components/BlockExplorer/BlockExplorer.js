@@ -20,7 +20,7 @@ class BlockExplorer extends Component {
   }
 
   componentWillMount() {
-    filter.watch((error, result) =>{
+    filter.watch((error, result) => {
       const block = web3.eth.getBlock(result, true);
       this.setState({
         curr_block: block.number
@@ -30,14 +30,16 @@ class BlockExplorer extends Component {
   }
 
   getBlocks(curr_block_no) {
-    const block_ids = this.state.block_ids.slice();
-    const block_hashes = this.state.block_hashes.slice();
+    const block_ids = [];//this.state.block_ids.slice();
+    const block_hashes = [];//this.state.block_hashes.slice();
     let max_blocks = 10;
-    if (curr_block_no < max_blocks) max_blocks = curr_block_no;
+    //if (curr_block_no < max_blocks) max_blocks = curr_block_no;
     for (let i = 0; i < max_blocks; i++, curr_block_no--) {
-      let currBlockObj = web3.eth.getBlock(curr_block_no);
-      block_ids.push(currBlockObj.number);
-      block_hashes.push(currBlockObj.hash);
+      if(curr_block_no) {
+        let currBlockObj = web3.eth.getBlock(curr_block_no);
+        block_ids.push(currBlockObj.number);
+        block_hashes.push(currBlockObj.hash);
+      }
     }
     this.setState({
       block_ids: block_ids,
@@ -50,7 +52,8 @@ class BlockExplorer extends Component {
     console.log("render", this.state.curr_block)
 
     let tableRows = [];
-    console.log("this.state.block_ids", this.state.block_ids)
+    console.log("this state block ids count", this.state.block_ids.length, this.state.block_ids)
+    //console.log("this.state.block_ids", this.state.block_ids)
     let ids = [...new Set(this.state.block_ids)];
     _.each(ids, (value, index) => {
       tableRows.push(
@@ -60,29 +63,47 @@ class BlockExplorer extends Component {
         </tr>
       )
     });
+    console.log("tablerows count", tableRows.length)
 
-    return (
-      <div className="BlockExplorer">
-        <div className="app-header">
-          <div className="logo-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h2>Block Explorer</h2>
-          </div>
-          <div>
-            Current Block: {this.state.curr_block}
-            <table className="block-table">
-              <thead><tr>
-                <th>Block No</th>
-                <th>Hash</th>
-              </tr></thead>
-              <tbody>
-                {tableRows}
-              </tbody>
-            </table>
+    if(this.state.block_ids.length > 0) {
+      return (
+        <div className="BlockExplorer">
+          <div className="app-header">
+            <div className="logo-header">
+              <img src={logo} className="App-logo" alt="logo" />
+              <h2>Block Explorer</h2>
+            </div>
+            <div>
+              Current Block: {this.state.curr_block}
+              <table className="block-table">
+                <thead><tr>
+                  <th>Block No</th>
+                  <th>Hash</th>
+                </tr></thead>
+                <tbody>
+                  {tableRows}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className="BlockExplorer">
+          <div className="app-header">
+            <div className="logo-header">
+              <img src={logo} className="App-logo" alt="logo" />
+              <h2>Block Explorer</h2>
+            </div>
+            <div>
+              Current Block: Loading...
+                  <img src="../../assets/img/wavy.gif" className="loadinglogo" alt="loadinglogo" />
+            </div>
+          </div>
+        </div>
+      );
+    }
   }
 }
 export default BlockExplorer;
