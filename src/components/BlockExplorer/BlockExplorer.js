@@ -6,7 +6,33 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import Web3 from 'web3';
 import _ from 'lodash';
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
-const filter = web3.eth.filter('latest');
+
+// Main Ethereum Network
+// https://mainnet.infura.io/NNpntMduRgVobEEAEUJX
+//
+// Test Ethereum Network (Ropsten)
+// https://ropsten.infura.io/NNpntMduRgVobEEAEUJX
+//
+// Test Ethereum Network (Rinkeby)
+// https://rinkeby.infura.io/NNpntMduRgVobEEAEUJX
+//
+// Test Ethereum Network (Kovan)
+// https://kovan.infura.io/NNpntMduRgVobEEAEUJX
+//
+// Test Ethereum Network (INFURAnet)
+// https://infuranet.infura.io/NNpntMduRgVobEEAEUJX
+//
+// IPFS Gateway
+// https://ipfs.infura.io
+//
+// IPFS RPC
+// https://ipfs.infura.io:5001
+
+//create web3 subscription for new ethereum block headers
+const subscription = web3.eth.subscribe('newBlockHeaders', (error, result) => {
+    if (!error)
+        console.log(error);
+})
 
 class BlockExplorer extends Component {
 
@@ -20,12 +46,26 @@ class BlockExplorer extends Component {
   }
 
   componentWillMount() {
-    filter.watch((error, result) => {
-      const block = web3.eth.getBlock(result, true);
-      this.setState({
-        curr_block: block.number
-      });
-      this.getBlocks(block.number);
+
+    subscription.on("data", function(blockHeader){
+      console.log("blockheader", blockHeader)
+    });
+    console.log("web3 from block explorer", web3.eth.blockNumber)
+
+    // filter.watch((error, result) => {
+    //   const block = web3.eth.getBlock(result, true);
+    //   this.setState({
+    //     curr_block: block.number
+    //   });
+    //   this.getBlocks(block.number);
+    // });
+  }
+
+  // unsubscribes the subscription
+  unsubscribe(){
+    subscription.unsubscribe(function(error, success){
+        if(success)
+            console.log('Successfully unsubscribed!');
     });
   }
 
@@ -96,10 +136,14 @@ class BlockExplorer extends Component {
               <img src={logo} className="App-logo" alt="logo" />
               <h2>Block Explorer</h2>
             </div>
-            <div>
-              Current Block: Loading...
-                  <img src="../../assets/img/wavy.gif" className="loadinglogo" alt="loadinglogo" />
-            </div>
+              <div className="loader" >
+                  <svg width="48" height="48" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                    <path d="M 150,0 a 150,150 0 0,1 106.066,256.066 l -35.355,-35.355 a -100,-100 0 0,0 -70.711,-170.711 z" fill="#76f19a">
+                      <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 150 150" to="360 150 150" begin="0s" dur=".5s" fill="freeze" repeatCount="indefinite"></animateTransform>
+                    </path>
+                  </svg>
+              <h3>Retrieving latest block headers...</h3>
+              </div>
           </div>
         </div>
       );

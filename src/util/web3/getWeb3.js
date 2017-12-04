@@ -32,7 +32,27 @@ let getWeb3 = new Promise(function(resolve, reject) {
       // Fallback to localhost if no web3 injection.
 
       let provider = new Web3.providers.HttpProvider('http://localhost:8545')
-
+      //const web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/NNpntMduRgVobEEAEUJX'));
+      // Main Ethereum Network
+      // https://mainnet.infura.io/NNpntMduRgVobEEAEUJX
+      //
+      // Test Ethereum Network (Ropsten)
+      // https://ropsten.infura.io/NNpntMduRgVobEEAEUJX
+      //
+      // Test Ethereum Network (Rinkeby)
+      // https://rinkeby.infura.io/NNpntMduRgVobEEAEUJX
+      //
+      // Test Ethereum Network (Kovan)
+      // https://kovan.infura.io/NNpntMduRgVobEEAEUJX
+      //
+      // Test Ethereum Network (INFURAnet)
+      // https://infuranet.infura.io/NNpntMduRgVobEEAEUJX
+      //
+      // IPFS Gateway
+      // https://ipfs.infura.io
+      //
+      // IPFS RPC
+      // https://ipfs.infura.io:5001
       web3 = new Web3(provider)
 
       results = {

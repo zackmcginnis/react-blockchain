@@ -17,7 +17,7 @@ npm start
 ```
 
 NOTE:
-Within your terminal, you should notice the app-server AND the geth client running concurrently.  If this is your first time syncing to the ethereum blockchain, you may need to wait until the sync is complete before you will receive accurate blockchain data from within the application.
+Within your terminal, you should notice the local app-server AND the geth client running concurrently.  If this is your first time syncing to the ethereum blockchain, you may need to wait until the sync is complete before you will receive accurate blockchain data from within the application.
 
 Navigate to http://localhost:3000/
 

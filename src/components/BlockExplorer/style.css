@@ -46,3 +46,30 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+
+
+ .loader {
+ height: 12em;
+ margin: -6em 0px 0px -6em;
+ padding: 10px;
+ position: fixed;
+ top: 50%;
+ left: 50%;
+ width: 12em;
+ z-index: 9999;
+ }
+
+ .loader svg {
+ height: 12em;
+ width: 12em;
+ }
+
+ .loader svg path {
+ stroke-width: 0px;
+ }
+
+ .loader svg path {
+ fill: #44cbf8;
+ stroke: none;
+ }
